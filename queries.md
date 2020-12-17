@@ -76,33 +76,58 @@
 
 <!-- Your Code Goes Here -->
 
+{founded_month: {$gte: 7}}
+{limit: 1000}
+
 ### 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.000
 
 <!-- Your Code Goes Here -->
+
+{founded_year: {$lt: 2000}, "acquisition.price_amount":{$gt:10000000}}
+
+<!--{name: 1, founded_year:1, "acquisition.price_amount":1} -->
 
 ### 13. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their `name` and `acquisition` field.
 
 <!-- Your Code Goes Here -->
 
+{"acquisition.acquired_year": {$gt:2010}}
+{project: {name: 1, acquisition:1}}
+{sort: {"acquisition.price_amount":-1 }}
+
 ### 14. Order the companies by their `founded year`, retrieving only their `name` and `founded year`.
 
 <!-- Your Code Goes Here -->
+
+{project: {name: 1, founded_year:1}}
+{sort: {founded_year: -1}}
 
 ### 15. All the companies that have been founded on the first seven days of the month, including the seventh. Sort them by their `acquisition price` in a descending order. Limit the search to 10 documents.
 
 <!-- Your Code Goes Here -->
 
+{founded_day: {$lte:7}}
+{project: {"acquisition.price_amount":-1 }}
+
 ### 16. All the companies on the 'web' `category` that have more than 4000 employees. Sort them by the amount of employees in ascending order.
 
 <!-- Your Code Goes Here -->
+
+{$and: [{category_code: "web"}, {number_of_employees: {$gt:4000}}]}
+{sort: {number_of_employees:1}}
 
 ### 17. All the companies whose acquisition amount is more than 10.000.000, and currency is 'EUR'.
 
 <!-- Your Code Goes Here -->
 
+{$and: [{"acquisiton.price_amount": {$gt:10000000}}, {"acquisiton.price_currency_code": "EUR"}]}
+
 ### 18. All the companies that have been acquired on the first trimester of the year. Limit the search to 10 companies, and retrieve only their `name` and `acquisition` fields.
 
 <!-- Your Code Goes Here -->
+
+{"acquisition.acquired_month":{$lte:4}}
+{sort:{name: 1, acquisition:1} }
 
 ### 19. All the companies that have been founded between 2000 and 2010, but have not been acquired before 2011.
 
